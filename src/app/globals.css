@@ -24,3 +24,23 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+:root {
+  --grav-bg: #050608;
+  --grav-ink: rgba(255, 255, 255, 0.92);
+  --grav-dim: rgba(255, 255, 255, 0.62);
+  --grav-accent: rgb(255, 137, 229); /* violet */
+}
+
+.grav-noise {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  mix-blend-mode: overlay;
+}
+
+@keyframes scanline {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(400px); opacity: 0; }
+}
+.animate-scanline {
+  animation: scanline 3s linear infinite;
+}

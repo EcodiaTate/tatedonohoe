@@ -160,3 +160,5 @@ declare module 'next/form' {
 
   export default function Form<RouteType>(props: FormProps<RouteType>): JSX.Element
 }
+teType>): JSX.Element
+}

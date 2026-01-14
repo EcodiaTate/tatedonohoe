@@ -1,0 +1,155 @@
+:root {
+  --bg: #000;
+  --fg: #fff;
+  --accent1: #ffd86b;
+  --accent2: #6bffb2;
+  --accent3: #6baaff;
+}
+
+body, html {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Inter', sans-serif;
+}
+
+.center {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.emailInput {
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--fg);
+  color: var(--fg);
+  font-size: 2rem;
+  text-align: center;
+  outline: none;
+  width: 90%;
+  max-width: 480px;
+}
+
+.surface {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  transition: opacity 2s ease;
+}
+
+.fadeOut {
+  opacity: 0;
+}
+
+.textArea {
+  font-size: 2.5rem;
+  line-height: 1.4;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  white-space: pre-wrap;
+  pointer-events: none;
+}
+
+.hiddenInput {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  caret-color: transparent;
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--accent1),
+    var(--accent2),
+    var(--accent3),
+    var(--accent1)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmerMove 3s infinite linear;
+}
+
+@keyframes shimmerMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+.fadeText {
+  font-size: 2rem;
+  opacity: 0;
+  animation: fadeIn 1.5s forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+
+
+/* cursor prompt */
+.cursorPrompt {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.5rem;
+  opacity: 0.7;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 0.7; }
+  51%, 100% { opacity: 0.1; }
+}
+
+/* progress bar */
+.progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: white;
+  transform-origin: left center;
+  transition: transform 0.1s linear;
+  opacity: 1;
+}
+
+/* bottom hints */
+.hintRow {
+  position: absolute;
+  bottom: 1.5rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
+  font-size: 0.9rem;
+  opacity: 0.5;
+  letter-spacing: 0.5px;
+}
+
+.submitButton {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.9rem;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+.submitButton:hover { opacity: 1; }
+
+.noBackspace {
+  color: white;
+}
+
+/* fade + shimmer kept from previous */
