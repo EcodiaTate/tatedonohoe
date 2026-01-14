@@ -33,6 +33,7 @@ declare namespace __next_route_internal_types__ {
 
   type StaticRoutes = 
     | `/`
+    | `/api/send-idea`
   type DynamicRoutes<T extends string = string> = never
 
   type RouteImpl<T> = 
@@ -159,6 +160,4 @@ declare module 'next/form' {
   } & FormRestProps
 
   export default function Form<RouteType>(props: FormProps<RouteType>): JSX.Element
-}
-teType>): JSX.Element
 }
