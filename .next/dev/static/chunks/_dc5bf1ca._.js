@@ -2,15 +2,14 @@
 "[project]/src/app/vanishing.module.css [app-client] (css module)", ((__turbopack_context__) => {
 
 __turbopack_context__.v({
-  "blink": "vanishing-module__NqjGpW__blink",
   "center": "vanishing-module__NqjGpW__center",
-  "centerPrompt": "vanishing-module__NqjGpW__centerPrompt",
-  "cursorPrompt": "vanishing-module__NqjGpW__cursorPrompt",
   "emailInput": "vanishing-module__NqjGpW__emailInput",
   "fadeIn": "vanishing-module__NqjGpW__fadeIn",
   "fadeOut": "vanishing-module__NqjGpW__fadeOut",
   "fadeText": "vanishing-module__NqjGpW__fadeText",
-  "hiddenInput": "vanishing-module__NqjGpW__hiddenInput",
+  "ideaInput": "vanishing-module__NqjGpW__ideaInput",
+  "ideaLine": "vanishing-module__NqjGpW__ideaLine",
+  "ideaRender": "vanishing-module__NqjGpW__ideaRender",
   "pop": "vanishing-module__NqjGpW__pop",
   "progress": "vanishing-module__NqjGpW__progress",
   "shimmer": "vanishing-module__NqjGpW__shimmer",
@@ -19,7 +18,6 @@ __turbopack_context__.v({
   "smileyOn": "vanishing-module__NqjGpW__smileyOn",
   "submitButton": "vanishing-module__NqjGpW__submitButton",
   "surface": "vanishing-module__NqjGpW__surface",
-  "textArea": "vanishing-module__NqjGpW__textArea",
 });
 }),
 "[project]/src/app/page.tsx [app-client] (ecmascript)", ((__turbopack_context__) => {
@@ -46,7 +44,7 @@ function Page() {
     const [elapsed, setElapsed] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(0);
     const [fading, setFading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [smileyPulse, setSmileyPulse] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(0);
-    const duration = 45_000; // 45s
+    const duration = 45_000;
     const startRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const flashSmiley = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
         "Page.useCallback[flashSmiley]": ()=>{
@@ -55,9 +53,8 @@ function Page() {
             }["Page.useCallback[flashSmiley]"]);
         }
     }["Page.useCallback[flashSmiley]"], []);
-    /* ------------------------------------------------------------
-     Backspace disabled in idea mode
-  ------------------------------------------------------------ */ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+    // Backspace disabled in idea mode (shows :)
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "Page.useEffect": ()=>{
             if (step !== "idea") return;
             const handler = {
@@ -77,40 +74,37 @@ function Page() {
         step,
         flashSmiley
     ]);
-    /* ------------------------------------------------------------
-     Timer
-  ------------------------------------------------------------ */ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+    // Timer
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "Page.useEffect": ()=>{
             if (step !== "idea") return;
             startRef.current = Date.now();
-            const tick = setInterval({
+            const tick = window.setInterval({
                 "Page.useEffect.tick": ()=>{
                     setElapsed(Date.now() - (startRef.current || 0));
                 }
             }["Page.useEffect.tick"], 100);
-            const end = setTimeout({
-                "Page.useEffect.end": ()=>{
-                    submit();
-                }
+            const end = window.setTimeout({
+                "Page.useEffect.end": ()=>submit()
             }["Page.useEffect.end"], duration);
             return ({
                 "Page.useEffect": ()=>{
-                    clearInterval(tick);
-                    clearTimeout(end);
+                    window.clearInterval(tick);
+                    window.clearTimeout(end);
                 }
             })["Page.useEffect"];
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         }
     }["Page.useEffect"], [
         step
     ]);
-    /* ------------------------------------------------------------
-     Enter submits (Shift+Enter allowed)
-  ------------------------------------------------------------ */ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+    // Enter submits (Shift+Enter ignored, because this is a single-line ritual)
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "Page.useEffect": ()=>{
             if (step !== "idea") return;
             const handler = {
                 "Page.useEffect.handler": (e)=>{
-                    if (e.key === "Enter" && !e.shiftKey) {
+                    if (e.key === "Enter") {
                         e.preventDefault();
                         submit();
                     }
@@ -120,15 +114,14 @@ function Page() {
             return ({
                 "Page.useEffect": ()=>window.removeEventListener("keydown", handler)
             })["Page.useEffect"];
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         }
     }["Page.useEffect"], [
         step,
         email,
         idea
     ]);
-    /* ------------------------------------------------------------
-     Submit → FormSubmit (client only)
-  ------------------------------------------------------------ */ const submit = async ()=>{
+    const submit = async ()=>{
         if (fading || step !== "idea") return;
         setFading(true);
         const form = new FormData();
@@ -143,33 +136,29 @@ function Page() {
                 body: form
             });
         } catch  {
-        // ignore — experience continues regardless
+        // ignore
         }
-        setTimeout(()=>setStep("done"), 2200);
+        window.setTimeout(()=>setStep("done"), 2200);
     };
-    /* ------------------------------------------------------------
-     Shimmer highlighting
-  ------------------------------------------------------------ */ const shimmerHTML = ()=>{
+    const shimmerHTML = ()=>{
         const highlight = /\b(build|make|create|design|invent|launch|ship|start|grow|change|break|learn|play|explore|future|world|tool|product|system|app|site|platform|ai|agent|community|marketplace|wallet|token|quest|local|beautiful|weird|simple|radical|alive)\b/gi;
         const escaped = idea.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
         return escaped.replace(highlight, (m)=>`<span class="${__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$vanishing$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].shimmer}">${m}</span>`);
     };
-    /* ------------------------------------------------------------
-     Renders
-  ------------------------------------------------------------ */ if (step === "done") {
+    if (step === "done") {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
             className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$vanishing$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].center,
             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                 className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$vanishing$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].fadeText,
-                children: "Well done. I’ll be in touch."
+                children: "Amazing"
             }, void 0, false, {
                 fileName: "[project]/src/app/page.tsx",
-                lineNumber: 129,
+                lineNumber: 114,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/app/page.tsx",
-            lineNumber: 128,
+            lineNumber: 113,
             columnNumber: 7
         }, this);
     }
@@ -187,21 +176,21 @@ function Page() {
                     type: "email",
                     value: email,
                     onChange: (e)=>setEmail(e.target.value),
-                    placeholder: "where should i reply ?",
+                    placeholder: "email",
                     className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$vanishing$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].emailInput
                 }, void 0, false, {
                     fileName: "[project]/src/app/page.tsx",
-                    lineNumber: 143,
+                    lineNumber: 128,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/page.tsx",
-                lineNumber: 137,
+                lineNumber: 122,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/app/page.tsx",
-            lineNumber: 136,
+            lineNumber: 121,
             columnNumber: 7
         }, this);
     }
@@ -214,7 +203,7 @@ function Page() {
                 children: ":)"
             }, smileyPulse, false, {
                 fileName: "[project]/src/app/page.tsx",
-                lineNumber: 162,
+                lineNumber: 147,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -224,51 +213,56 @@ function Page() {
                 }
             }, void 0, false, {
                 fileName: "[project]/src/app/page.tsx",
-                lineNumber: 167,
+                lineNumber: 152,
                 columnNumber: 7
-            }, this),
-            idea.length === 0 && !fading && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$vanishing$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].centerPrompt,
-                children: "what are you trying to build"
-            }, void 0, false, {
-                fileName: "[project]/src/app/page.tsx",
-                lineNumber: 174,
-                columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$vanishing$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].textArea,
-                dangerouslySetInnerHTML: {
-                    __html: shimmerHTML()
-                }
-            }, void 0, false, {
+                className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$vanishing$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].ideaLine,
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$vanishing$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].ideaRender,
+                        "aria-hidden": true,
+                        dangerouslySetInnerHTML: {
+                            __html: shimmerHTML()
+                        }
+                    }, void 0, false, {
+                        fileName: "[project]/src/app/page.tsx",
+                        lineNumber: 160,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                        autoFocus: true,
+                        type: "text",
+                        className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$vanishing$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].ideaInput,
+                        value: idea,
+                        onChange: (e)=>setIdea(e.target.value),
+                        placeholder: "whats your dream?",
+                        "aria-label": "whats your dream?"
+                    }, void 0, false, {
+                        fileName: "[project]/src/app/page.tsx",
+                        lineNumber: 167,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
                 fileName: "[project]/src/app/page.tsx",
-                lineNumber: 178,
-                columnNumber: 7
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
-                autoFocus: true,
-                className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$vanishing$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].hiddenInput,
-                value: idea,
-                onChange: (e)=>setIdea(e.target.value),
-                "aria-label": "What are you trying to build?"
-            }, void 0, false, {
-                fileName: "[project]/src/app/page.tsx",
-                lineNumber: 184,
+                lineNumber: 158,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                type: "button",
                 className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$vanishing$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].submitButton,
                 onClick: submit,
                 children: "Done →"
             }, void 0, false, {
                 fileName: "[project]/src/app/page.tsx",
-                lineNumber: 193,
+                lineNumber: 178,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/page.tsx",
-        lineNumber: 160,
+        lineNumber: 145,
         columnNumber: 5
     }, this);
 }

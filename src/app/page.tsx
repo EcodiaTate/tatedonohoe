@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import styles from "./vanishing.module.css";
 
-const INBOX ="3aeccaf7a7e1469935deff3ec48f2743";
+const INBOX = "3aeccaf7a7e1469935deff3ec48f2743";
 
 export default function Page() {
   const [step, setStep] = useState<"email" | "idea" | "done">("email");
@@ -13,16 +13,14 @@ export default function Page() {
   const [fading, setFading] = useState(false);
   const [smileyPulse, setSmileyPulse] = useState(0);
 
-  const duration = 45_000; // 45s
+  const duration = 45_000;
   const startRef = useRef<number | null>(null);
 
   const flashSmiley = useCallback(() => {
     setSmileyPulse((n) => n + 1);
   }, []);
 
-  /* ------------------------------------------------------------
-     Backspace disabled in idea mode
-  ------------------------------------------------------------ */
+  // Backspace disabled in idea mode (shows :)
   useEffect(() => {
     if (step !== "idea") return;
 
@@ -37,36 +35,31 @@ export default function Page() {
     return () => window.removeEventListener("keydown", handler);
   }, [step, flashSmiley]);
 
-  /* ------------------------------------------------------------
-     Timer
-  ------------------------------------------------------------ */
+  // Timer
   useEffect(() => {
     if (step !== "idea") return;
 
     startRef.current = Date.now();
 
-    const tick = setInterval(() => {
+    const tick = window.setInterval(() => {
       setElapsed(Date.now() - (startRef.current || 0));
     }, 100);
 
-    const end = setTimeout(() => {
-      submit();
-    }, duration);
+    const end = window.setTimeout(() => submit(), duration);
 
     return () => {
-      clearInterval(tick);
-      clearTimeout(end);
+      window.clearInterval(tick);
+      window.clearTimeout(end);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [step]);
 
-  /* ------------------------------------------------------------
-     Enter submits (Shift+Enter allowed)
-  ------------------------------------------------------------ */
+  // Enter submits (Shift+Enter ignored, because this is a single-line ritual)
   useEffect(() => {
     if (step !== "idea") return;
 
     const handler = (e: KeyboardEvent) => {
-      if (e.key === "Enter" && !e.shiftKey) {
+      if (e.key === "Enter") {
         e.preventDefault();
         submit();
       }
@@ -74,11 +67,9 @@ export default function Page() {
 
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [step, email, idea]);
 
-  /* ------------------------------------------------------------
-     Submit → FormSubmit (client only)
-  ------------------------------------------------------------ */
   const submit = async () => {
     if (fading || step !== "idea") return;
     setFading(true);
@@ -96,15 +87,12 @@ export default function Page() {
         body: form,
       });
     } catch {
-      // ignore — experience continues regardless
+      // ignore
     }
 
-    setTimeout(() => setStep("done"), 2200);
+    window.setTimeout(() => setStep("done"), 2200);
   };
 
-  /* ------------------------------------------------------------
-     Shimmer highlighting
-  ------------------------------------------------------------ */
   const shimmerHTML = () => {
     const highlight =
       /\b(build|make|create|design|invent|launch|ship|start|grow|change|break|learn|play|explore|future|world|tool|product|system|app|site|platform|ai|agent|community|marketplace|wallet|token|quest|local|beautiful|weird|simple|radical|alive)\b/gi;
@@ -120,13 +108,10 @@ export default function Page() {
     );
   };
 
-  /* ------------------------------------------------------------
-     Renders
-  ------------------------------------------------------------ */
   if (step === "done") {
     return (
       <main className={styles.center}>
-        <p className={styles.fadeText}>Well done. I’ll be in touch.</p>
+        <p className={styles.fadeText}>Amazing</p>
       </main>
     );
   }
@@ -146,7 +131,7 @@ export default function Page() {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="where should i reply ?"
+            placeholder="email"
             className={styles.emailInput}
           />
         </form>
@@ -169,28 +154,28 @@ export default function Page() {
         style={{ transform: `scaleX(${progress})` }}
       />
 
-      {/* prompt above caret */}
-      {idea.length === 0 && !fading && (
-        <div className={styles.centerPrompt}>what are you trying to build</div>
-      )}
+      {/* single-line "email style" idea input */}
+      <div className={styles.ideaLine}>
+        {/* shimmer overlay (non-interactive) */}
+        <div
+          className={styles.ideaRender}
+          aria-hidden
+          dangerouslySetInnerHTML={{ __html: shimmerHTML() }}
+        />
 
-      {/* rendered text */}
-      <div
-        className={styles.textArea}
-        dangerouslySetInnerHTML={{ __html: shimmerHTML() }}
-      />
+        {/* real input owns caret */}
+        <input
+          autoFocus
+          type="text"
+          className={styles.ideaInput}
+          value={idea}
+          onChange={(e) => setIdea(e.target.value)}
+          placeholder="whats your dream?"
+          aria-label="whats your dream?"
+        />
+      </div>
 
-      {/* input owner */}
-      <textarea
-        autoFocus
-        className={styles.hiddenInput}
-        value={idea}
-        onChange={(e) => setIdea(e.target.value)}
-        aria-label="What are you trying to build?"
-      />
-
-      {/* optional explicit submit */}
-      <button className={styles.submitButton} onClick={submit}>
+      <button type="button" className={styles.submitButton} onClick={submit}>
         Done →
       </button>
     </main>
