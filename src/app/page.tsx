@@ -126,7 +126,7 @@ export default function Page() {
   if (step === "done") {
     return (
       <main className={styles.center}>
-        <p className={styles.fadeText}>Well done. I’ll have a think.</p>
+        <p className={styles.fadeText}>Well done. I’ll be in touch.</p>
       </main>
     );
   }
