@@ -137,7 +137,6 @@ export default function Page() {
           what are you trying to build?
           <span className={styles.miniPromptSub}>
             {" "}
-            (press Enter to send, Shift+Enter for a new line)
           </span>
         </div>
       )}

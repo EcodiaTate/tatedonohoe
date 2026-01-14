@@ -153,3 +153,19 @@ body, html {
 }
 
 /* fade + shimmer kept from previous */
+
+.miniPrompt {
+    position: absolute;
+    top: 22px;
+    left: 22px;
+    right: 22px;
+    font-size: 12px;
+    opacity: 0.55;
+    letter-spacing: 0.2px;
+    pointer-events: none;
+  }
+  
+  .miniPromptSub {
+    opacity: 0.75;
+  }
+  
