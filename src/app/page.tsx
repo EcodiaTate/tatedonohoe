@@ -3,8 +3,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import styles from "./vanishing.module.css";
 
-const INBOX =
-  process.env.NEXT_PUBLIC_IDEA_INBOX_EMAIL || "you@example.com";
+const INBOX ="3aeccaf7a7e1469935deff3ec48f2743";
 
 export default function Page() {
   const [step, setStep] = useState<"email" | "idea" | "done">("email");

@@ -42,7 +42,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$vanishing$2e$m
 ;
 ;
 ;
-const INBOX = ("TURBOPACK compile-time value", "tate@ecodia.au") || "you@example.com";
+const INBOX = "3aeccaf7a7e1469935deff3ec48f2743";
 function Page() {
     const [step, setStep] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("email");
     const [email, setEmail] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
@@ -144,12 +144,12 @@ function Page() {
                 children: "Well done. I’ll have a think."
             }, void 0, false, {
                 fileName: "[project]/src/app/page.tsx",
-                lineNumber: 130,
+                lineNumber: 129,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/app/page.tsx",
-            lineNumber: 129,
+            lineNumber: 128,
             columnNumber: 7
         }, this);
     }
@@ -171,17 +171,17 @@ function Page() {
                     className: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$app$2f$vanishing$2e$module$2e$css__$5b$app$2d$ssr$5d$__$28$css__module$29$__["default"].emailInput
                 }, void 0, false, {
                     fileName: "[project]/src/app/page.tsx",
-                    lineNumber: 144,
+                    lineNumber: 143,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/page.tsx",
-                lineNumber: 138,
+                lineNumber: 137,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "[project]/src/app/page.tsx",
-            lineNumber: 137,
+            lineNumber: 136,
             columnNumber: 7
         }, this);
     }
@@ -194,7 +194,7 @@ function Page() {
                 children: ":)"
             }, smileyPulse, false, {
                 fileName: "[project]/src/app/page.tsx",
-                lineNumber: 163,
+                lineNumber: 162,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -204,7 +204,7 @@ function Page() {
                 }
             }, void 0, false, {
                 fileName: "[project]/src/app/page.tsx",
-                lineNumber: 168,
+                lineNumber: 167,
                 columnNumber: 7
             }, this),
             idea.length === 0 && !fading && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -212,7 +212,7 @@ function Page() {
                 children: "what are you trying to build"
             }, void 0, false, {
                 fileName: "[project]/src/app/page.tsx",
-                lineNumber: 175,
+                lineNumber: 174,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -222,7 +222,7 @@ function Page() {
                 }
             }, void 0, false, {
                 fileName: "[project]/src/app/page.tsx",
-                lineNumber: 179,
+                lineNumber: 178,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -233,7 +233,7 @@ function Page() {
                 "aria-label": "What are you trying to build?"
             }, void 0, false, {
                 fileName: "[project]/src/app/page.tsx",
-                lineNumber: 185,
+                lineNumber: 184,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -242,13 +242,13 @@ function Page() {
                 children: "Done →"
             }, void 0, false, {
                 fileName: "[project]/src/app/page.tsx",
-                lineNumber: 194,
+                lineNumber: 193,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/page.tsx",
-        lineNumber: 161,
+        lineNumber: 160,
         columnNumber: 5
     }, this);
 }
