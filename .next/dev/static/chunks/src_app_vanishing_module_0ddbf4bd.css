@@ -47,6 +47,42 @@ html, body {
   position: relative;
 }
 
+.vanishing-module__NqjGpW__splashIn {
+  animation: .9s forwards vanishing-module__NqjGpW__splashIn;
+}
+
+.vanishing-module__NqjGpW__splashOut {
+  animation: 1.8s forwards vanishing-module__NqjGpW__splashOut;
+}
+
+@keyframes vanishing-module__NqjGpW__splashIn {
+  from {
+    opacity: 0;
+    filter: blur(3px);
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur();
+    transform: translateY(0);
+  }
+}
+
+@keyframes vanishing-module__NqjGpW__splashOut {
+  from {
+    opacity: 1;
+    filter: blur();
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    filter: blur(6px);
+    transform: translateY(-6px);
+  }
+}
+
 .vanishing-module__NqjGpW__emailInput {
   color: var(--fg);
   letter-spacing: -.02em;
@@ -70,47 +106,72 @@ html, body {
   border-bottom-color: #0a0a0a;
 }
 
-.vanishing-module__NqjGpW__ideaLine {
-  width: min(560px, 100vw - 48px);
+.vanishing-module__NqjGpW__ideaFrame {
+  scrollbar-width: none;
+  width: min(760px, 100vw - 56px);
+  max-width: 760px;
+  height: min(56vh, 420px);
   position: fixed;
   top: 50%;
   left: 50%;
+  overflow: auto;
   transform: translate(-50%, -50%);
 }
 
-.vanishing-module__NqjGpW__ideaInput {
+.vanishing-module__NqjGpW__ideaFrame::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.vanishing-module__NqjGpW__ideaStack {
+  min-height: 100%;
+  padding: 18px 10px;
+  position: relative;
+}
+
+.vanishing-module__NqjGpW__ideaTextarea {
+  resize: none;
   letter-spacing: -.02em;
-  text-align: center;
   color: #0000;
   caret-color: #0a0a0af2;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
   background: none;
   border: none;
-  border-bottom: 2px solid #0a0a0ae6;
   outline: none;
   width: 100%;
-  padding: 10px 6px 12px;
-  font-size: clamp(26px, 3.2vw, 44px);
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: clamp(22px, 2.4vw, 40px);
   font-weight: 650;
+  line-height: 1.18;
+  overflow: hidden;
 }
 
-.vanishing-module__NqjGpW__ideaInput::placeholder {
-  color: #0a0a0a59;
-  font-weight: 500;
-}
-
-.vanishing-module__NqjGpW__ideaRender {
+.vanishing-module__NqjGpW__ideaRenderMulti {
   pointer-events: none;
   letter-spacing: -.02em;
-  text-align: center;
   color: var(--fg);
-  white-space: nowrap;
-  text-overflow: clip;
-  padding: 10px 6px 12px;
-  font-size: clamp(26px, 3.2vw, 44px);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: clamp(22px, 2.4vw, 40px);
   font-weight: 650;
+  line-height: 1.18;
   position: absolute;
-  inset: 0;
-  overflow: hidden;
+  inset: 18px 10px;
+}
+
+.vanishing-module__NqjGpW__ideaFrame:after {
+  content: "";
+  opacity: .9;
+  background: #0a0a0ae6;
+  width: 100%;
+  height: 2px;
+  margin-top: 18px;
+  display: block;
+  position: sticky;
+  bottom: 0;
 }
 
 .vanishing-module__NqjGpW__progress {
@@ -127,7 +188,7 @@ html, body {
 
 .vanishing-module__NqjGpW__fadeOut {
   opacity: 0;
-  transition: opacity 1s;
+  transition: opacity 1.6s;
 }
 
 .vanishing-module__NqjGpW__fadeText {
@@ -173,7 +234,7 @@ html, body {
   border: none;
   font-family: inherit;
   font-size: 14px;
-  transition: transform .12s;
+  transition: transform .12s, opacity .12s;
   position: fixed;
   bottom: 18px;
   right: 20px;
@@ -185,6 +246,46 @@ html, body {
 
 .vanishing-module__NqjGpW__submitButton:active {
   transform: translateY(0);
+}
+
+.vanishing-module__NqjGpW__submitButton:disabled {
+  opacity: .35;
+  cursor: default;
+}
+
+.vanishing-module__NqjGpW__submitButtonInline {
+  color: #0a0a0a;
+  cursor: pointer;
+  letter-spacing: .2px;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 14px;
+  transition: transform .12s, opacity .12s;
+}
+
+.vanishing-module__NqjGpW__submitButtonInline:hover {
+  transform: translateY(-1px);
+}
+
+.vanishing-module__NqjGpW__submitButtonInline:active {
+  transform: translateY(0);
+}
+
+.vanishing-module__NqjGpW__submitButtonInline:disabled {
+  opacity: .35;
+  cursor: default;
+}
+
+.vanishing-module__NqjGpW__hint {
+  opacity: .55;
+  letter-spacing: .02em;
+  -webkit-user-select: none;
+  user-select: none;
+  font-size: 12px;
+  position: fixed;
+  bottom: 18px;
+  left: 20px;
 }
 
 .vanishing-module__NqjGpW__smiley {
