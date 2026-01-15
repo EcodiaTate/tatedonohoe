@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "tatedonohoe",
     description:
-      "Quiet experiments, software, and systems. If you want to disrupt, start here.",
+      "Experiments, software, and systems. If you want to disrupt, start here.",
     url: "https://tatedonohoe.au",
     siteName: "Tate Donohoe",
     type: "website",
