@@ -44,9 +44,8 @@ htmlcov/
 .coverage.*
 node_modules/
 .cache
-.next/*
 .next/
-.next
+
 nosetests.xml
 coverage.xml
 *.cover

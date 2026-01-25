@@ -1,46 +1,159 @@
 @import "tailwindcss";
 
+
+/* ------------------------------------------------------------
+   Tate portfolio: paper / architecture defaults
+   ------------------------------------------------------------ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* paper + ink */
+  --paper: #fdfcfb;
+  --paper-2: #f9f7f5;
+  --ink: #141414;
+  --muted: #6b7280; /* zinc-ish */
+  --hairline: rgba(0, 0, 0, 0.10);
+
+  /* focus */
+  --focus: rgba(0, 0, 0, 0.35);
+
+  /* fonts from next/font */
+  --font-sans: system-ui;
+  --font-mono: ui-monospace;
+  --font-display: ui-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans), system-ui, -apple-system, Segoe UI, Roboto, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+::selection {
+  background: #000;
+  color: #fff;
+}
+
+/* Make links feel “print” not webby */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Better default focus */
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+/* Prevent iOS text zoom weirdness */
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Smoother scroll on modern browsers */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Make hairlines and borders consistent */
+* {
+  border-color: var(--hairline);
+}
+
+/* Utility classes to use in Tailwind className strings */
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display), ui-serif, Georgia, "Times New Roman", Times,
+      serif;
+    font-variation-settings: "opsz" 144; /* helps Fraunces feel nicer */
+  }
+
+  .font-mono {
+    font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco,
+      Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+
+  /* subtle “paper lift” for cards (optional) */
+  .paper-shadow {
+    box-shadow: 18px 18px 0 rgba(0, 0, 0, 0.03);
+  }
+
+  /* hairline border */
+  .hairline {
+    border-color: rgba(0, 0, 0, 0.10);
+  }
+}
+
+
+/* ---------------------------------------------
+   Inspector Card Scrollbar
+   Minimal, architectural, non-distracting
+---------------------------------------------- */
+
 :root {
-  --grav-bg: #050608;
-  --grav-ink: rgba(255, 255, 255, 0.92);
-  --grav-dim: rgba(255, 255, 255, 0.62);
-  --grav-accent: rgb(255, 137, 229); /* violet */
+  --inspector-scroll-track: transparent;
+  --inspector-scroll-thumb: rgba(0, 0, 0, 0.18);
+  --inspector-scroll-thumb-hover: rgba(0, 0, 0, 0.32);
+  --inspector-scroll-width: 6px;
 }
 
-.grav-noise {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  mix-blend-mode: overlay;
+/* WebKit (Chrome, Edge, Safari) */
+.inspector-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--inspector-scroll-thumb) var(--inspector-scroll-track);
 }
 
-@keyframes scanline {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(400px); opacity: 0; }
+.inspector-scroll::-webkit-scrollbar {
+  width: var(--inspector-scroll-width);
 }
-.animate-scanline {
-  animation: scanline 3s linear infinite;
+
+.inspector-scroll::-webkit-scrollbar-track {
+  background: var(--inspector-scroll-track);
+}
+
+.inspector-scroll::-webkit-scrollbar-thumb {
+  background-color: var(--inspector-scroll-thumb);
+  border-radius: 999px;
+}
+
+.inspector-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: var(--inspector-scroll-thumb-hover);
+}
+
+/* ---------------------------------------------
+   Outlined Display Text (Inactive Project Titles)
+---------------------------------------------- */
+
+:root {
+  --outline-ink: rgba(0, 0, 0, 0.35);
+}
+
+/* Primary (WebKit) */
+.outline-text {
+  color: transparent;
+  -webkit-text-stroke: 1.25px var(--outline-ink);
+  text-stroke: 1.25px var(--outline-ink);
+}
+
+/* Fallback for browsers without text-stroke */
+@supports not (-webkit-text-stroke: 1px black) {
+  .outline-text {
+    color: rgba(0, 0, 0, 0.06);
+    text-shadow:
+      1px 0 0 var(--outline-ink),
+     -1px 0 0 var(--outline-ink),
+      0 1px 0 var(--outline-ink),
+      0 -1px 0 var(--outline-ink);
+  }
 }
