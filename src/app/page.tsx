@@ -361,8 +361,8 @@ export default function PaperArchitect() {
                 </span>
               </h1>
               <p className="text-xl sm:text-2xl md:text-3xl font-medium leading-[1.25] tracking-tight text-zinc-800">
-  I didn't learn to code to get a job. I learned to code so I could build <StrongWord className="text-[#396041]">Ecodia</StrongWord>. 
-  Now I engineer for others who care about the <StrongWord className="text-[#c29c15]">world.</StrongWord>
+  I learned to code so I could build <StrongWord className="text-[#396041]">Ecodia</StrongWord>. 
+  Now I can engineer for others who care about the <StrongWord className="text-[#c29c15]">world.</StrongWord>
 </p>
 
               <p className="mt-10 text-sm sm:text-base text-zinc-500 leading-relaxed max-w-[50ch] font-medium italic">
@@ -424,7 +424,7 @@ export default function PaperArchitect() {
               <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-end">
                 <div className="text-xs text-zinc-500 max-w-[40ch] leading-relaxed font-medium uppercase tracking-tighter">
                   Available for full-stack builds, architectural consulting, and platform rescues.
-                  Based in QLD, Australia. Working Globally.
+                  Based in QLD, Australia. Working Everywhere.
                 </div>
                 <div className="md:text-right">
                   <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest tracking-[0.4em]">
