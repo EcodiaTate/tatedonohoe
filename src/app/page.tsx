@@ -26,13 +26,13 @@ const PROJECTS = {
     //tech: ["Next.js", "Supabase", "Stripe Connect"],
     //status: "In Development",
   //},
-  ENDLESS_SUMMER: {
-    tag: "Full-Stack Engineer",
-    description: "Modern rebuild of a high-revenue platform: faster, cleaner, and built to convert.",
-    metrics: ["Core Web Vitals uplift", "SEO foundations", "CMS + content pipeline"],
-    tech: ["TypeScript", "Tailwind", "Payload CMS"],
-    status: "Q1 Launch",
-  },
+  //ENDLESS_SUMMER: {
+   // tag: "Full-Stack Engineer",
+   // description: "Modern rebuild of a high-revenue platform: faster, cleaner, and built to convert.",
+   // metrics: ["Core Web Vitals uplift", "SEO foundations", "CMS + content pipeline"],
+   // tech: ["TypeScript", "Tailwind", "Payload CMS"],
+   // status: "Q1 Launch",
+  //},
 } as const;
 
 type ProjectKey = keyof typeof PROJECTS;
