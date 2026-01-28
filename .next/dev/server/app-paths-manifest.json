@@ -1,6 +1,5 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
-  "/i-worked-on-this/ecodia/page": "app/i-worked-on-this/ecodia/page.js",
-  "/i-worked-on-this/endless_summer/page": "app/i-worked-on-this/endless_summer/page.js",
-  "/page": "app/page.js"
+  "/page": "app/page.js",
+  "/start/page": "app/start/page.js"
 }

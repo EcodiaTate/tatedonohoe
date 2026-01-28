@@ -74,6 +74,15 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
   type __Unused = __Check
 }
 
+// Validate ../../../src/app/start/page.tsx
+{
+  type __IsExpected<Specific extends AppPageConfig<"/start">> = Specific
+  const handler = {} as typeof import("../../../src/app/start/page.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../../src/app/api/send-idea/route.ts
 {
   type __IsExpected<Specific extends RouteHandlerConfig<"/api/send-idea">> = Specific

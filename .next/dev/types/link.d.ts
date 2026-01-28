@@ -36,6 +36,7 @@ declare namespace __next_route_internal_types__ {
     | `/api/send-idea`
     | `/i-worked-on-this/ecodia`
     | `/i-worked-on-this/endless_summer`
+    | `/start`
   type DynamicRoutes<T extends string = string> = never
 
   type RouteImpl<T> = 

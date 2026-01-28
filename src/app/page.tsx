@@ -2,51 +2,10 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 
-interface ProjectData {
-  tag: string;
-  description: string;
-  metrics: readonly string[];
-  tech: readonly string[];
-  status: string;
-}
+import { PROJECTS, type ProjectData } from "@/content/projects";
 
-const PROJECTS = {
-  ECODIA: {
-    tag: "Founder / Engineer",
-    description:
-      "A reward ecosystem that makes real-world action measurable, tradable, and worth doing.",
-    metrics: ["Token & voucher ledger", "Impact attribution", "Real-time reward logic"],
-    tech: ["React Native", "FastAPI", "Neo4j", "Postgres"],
-    status: "Active",
-  },
- // LENDY: {
-   // tag: "Architecture & Lead Dev",
-    //description: "Community lending + bartering with a trust layer that doesn’t feel like a bank.",
-    //metrics: ["Identity & trust signals", "Escrow-like holds", "Marketplace + messaging"],
-    //tech: ["Next.js", "Supabase", "Stripe Connect"],
-    //status: "In Development",
-  //},
-  //ENDLESS_SUMMER: {
-   // tag: "Full-Stack Engineer",
-   // description: "Modern rebuild of a high-revenue platform: faster, cleaner, and built to convert.",
-   // metrics: ["Core Web Vitals uplift", "SEO foundations", "CMS + content pipeline"],
-   // tech: ["TypeScript", "Tailwind", "Payload CMS"],
-   // status: "Q1 Launch",
-  //},
-} as const;
+type ProjectId = ProjectData["id"];
 
-type ProjectKey = keyof typeof PROJECTS;
-
-/**
- * NOTE:
- * You have Next.js "typed routes" enabled.
- * Your generated Link types currently ONLY know about:
- *   "/i-worked-on-this/rebuild"
- * (that’s why it’s insisting RouteImpl<"/i-worked-on-this/rebuild">).
- *
- * Fix WITHOUT fighting types: use the UrlObject form (pathname string),
- * which satisfies href: UrlObject.
- */
 function useScrollY() {
   const [y, setY] = useState(0);
   useEffect(() => {
@@ -172,15 +131,8 @@ function StrongWord({
   );
 }
 
-function InspectorCard({
-  activeProject,
-  current,
-}: {
-  activeProject: ProjectKey;
-  current: ProjectData;
-}) {
-  // Use UrlObject form to satisfy Link's typed href (avoids RouteImpl narrowing bugs)
-  const href = { pathname: `/i-worked-on-this/${activeProject.toLowerCase()}` };
+function InspectorCard({ current }: { current: ProjectData }) {
+  const href = { pathname: `/i-worked-on-this/${current.slug}` };
 
   return (
     <div className="w-full bg-white border border-black/10 shadow-[20px_20px_0px_rgba(0,0,0,0.02)] p-6 sm:p-10 relative overflow-hidden group">
@@ -189,7 +141,7 @@ function InspectorCard({
       <div className="flex justify-between items-start mb-10 border-b border-black/10 pb-5 relative z-10">
         <div className="flex flex-col gap-1">
           <span className="text-[10px] font-black uppercase tracking-[0.2em] text-black">
-            {activeProject} // SPEC_2026
+            {current.title} // SPEC_2026
           </span>
           <span className="text-[9px] font-mono text-zinc-400 uppercase tracking-widest">
             Engineering Report
@@ -254,7 +206,7 @@ function InspectorCard({
 
             <Link
               href={href}
-              className="text-[10px] font-black uppercase underline! underline-offset-8 hover:text-[#396041] transition-colors"
+              className="text-[10px] font-black uppercase underline! underline-offset-8 hover:text-[#396041]! transition-colors"
             >
               More on this
             </Link>
@@ -266,25 +218,28 @@ function InspectorCard({
 }
 
 export default function PaperArchitect() {
-  const [activeProject, setActiveProject] = useState<ProjectKey>("ECODIA");
+  const initialId: ProjectId = PROJECTS[0]?.id ?? "ecodia";
+  const [activeProjectId, setActiveProjectId] = useState<ProjectId>(initialId);
   const [mobileInspectorOpen, setMobileInspectorOpen] = useState(false);
 
   const reducedMotion = usePrefersReducedMotion();
   const scrollY = useScrollY();
 
-  const current = useMemo(() => PROJECTS[activeProject], [activeProject]);
+  const current = useMemo(() => {
+    return PROJECTS.find((p) => p.id === activeProjectId) ?? PROJECTS[0];
+  }, [activeProjectId]);
 
-  function selectProject(key: ProjectKey) {
-    setActiveProject(key);
+  function selectProject(id: ProjectId) {
+    setActiveProjectId(id);
     setMobileInspectorOpen(true);
   }
 
-  const noiseOffset = reducedMotion ? 0 : Math.min(40, scrollY * 0.03); // 0..40px
+  const noiseOffset = reducedMotion ? 0 : Math.min(40, scrollY * 0.03);
   const blobA = reducedMotion ? 0 : Math.min(120, scrollY * 0.12);
   const blobB = reducedMotion ? 0 : Math.min(160, scrollY * 0.08);
   const blobC = reducedMotion ? 0 : Math.min(200, scrollY * 0.05);
 
-  const heroShiftA = reducedMotion ? 0 : Math.sin(scrollY * 0.004) * 6; // px
+  const heroShiftA = reducedMotion ? 0 : Math.sin(scrollY * 0.004) * 6;
   const heroShiftB = reducedMotion ? 0 : Math.sin(scrollY * 0.004 + 1.2) * 10;
   const heroShiftC = reducedMotion ? 0 : Math.sin(scrollY * 0.004 + 2.4) * 7;
 
@@ -316,13 +271,33 @@ export default function PaperArchitect() {
       <div className="flex flex-col md:flex-row min-h-screen relative z-10">
         <section className="w-full md:w-3/5 px-6 sm:px-8 md:px-20 pt-12 md:pt-24 pb-40">
           <Reveal y={10}>
-            <header className="mb-20 md:mb-32 flex flex-col gap-1 text-black">
-              <h2 className="text-sm font-black tracking-tight uppercase">Tate Donohoe</h2>
-              <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-[0.3em] font-bold">
-                Product Engineer / AU
-              </p>
+            <header className="mb-20 md:mb-32 flex items-start justify-between gap-6 text-black">
+              <div className="flex flex-col gap-1">
+                <h2 className="text-sm font-black tracking-tight uppercase">Tate Donohoe</h2>
+                <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-[0.3em] font-bold">
+                  Product Engineer / AU
+                </p>
+              </div>
+
+              {/* TOP CTA */}
+              <Link
+href={{ pathname: "/start" }}
+                className="hidden sm:inline-flex h-10 items-center justify-center border-2 border-black px-4 text-[10px] font-black uppercase tracking-[0.22em] hover:bg-black hover:text-white! transition-colors"
+              >
+                Start a project
+              </Link>
             </header>
           </Reveal>
+
+          {/* Mobile top CTA */}
+          <div className="sm:hidden -mt-10 mb-16">
+            <Link
+href={{ pathname: "/start" }}
+              className="inline-flex h-11 w-full items-center justify-center border-2 border-black bg-white text-[10px] font-black uppercase tracking-[0.22em] active:translate-y-[1px] transition-transform"
+            >
+              Start a project
+            </Link>
+          </div>
 
           <Reveal delayMs={80} y={16}>
             <div className="max-w-xl mb-24 md:mb-48">
@@ -360,26 +335,38 @@ export default function PaperArchitect() {
                   that comes next.
                 </span>
               </h1>
+
               <p className="text-xl sm:text-2xl md:text-3xl font-medium leading-[1.25] tracking-tight text-zinc-800">
-  I learned to code so I could build <StrongWord className="text-[#396041]">Ecodia</StrongWord>. 
-  Now I can engineer for others who care about the <StrongWord className="text-[#c29c15]">world.</StrongWord>
-</p>
+                I learned to code so I could build{" "}
+                <StrongWord className="text-[#396041]">Ecodia</StrongWord>. Now I can engineer for
+                others who care about the <StrongWord className="text-[#c29c15]">world.</StrongWord>
+              </p>
 
               <p className="mt-10 text-sm sm:text-base text-zinc-500 leading-relaxed max-w-[50ch] font-medium italic">
                 "Building digital infrastructure for the conscious economy."
               </p>
+
+              {/* Inline hero CTA */}
+              <div className="mt-10">
+                <Link
+href={{ pathname: "/start" }}
+                  className="inline-flex h-12 items-center justify-center border-2 border-black px-5 text-[10px] font-black uppercase tracking-[0.22em] hover:bg-black hover:text-white! transition-colors"
+                >
+                  Tell me your idea
+                </Link>
+              </div>
             </div>
           </Reveal>
 
           <div className="space-y-12 md:space-y-32">
-            {(Object.keys(PROJECTS) as ProjectKey[]).map((key, idx) => {
-              const isActive = activeProject === key;
+            {PROJECTS.map((proj, idx) => {
+              const isActive = activeProjectId === proj.id;
 
               return (
-                <Reveal key={key} delayMs={idx * 60} y={18}>
+                <Reveal key={proj.id} delayMs={idx * 60} y={18}>
                   <div
-                    onMouseEnter={() => setActiveProject(key)}
-                    onClick={() => selectProject(key)}
+                    onMouseEnter={() => setActiveProjectId(proj.id)}
+                    onClick={() => selectProject(proj.id)}
                     role="button"
                     tabIndex={0}
                     className="group cursor-pointer py-10 border-t border-black/10 outline-none block"
@@ -392,7 +379,7 @@ export default function PaperArchitect() {
                           isActive ? "text-black translate-x-4" : "outline-text",
                         ].join(" ")}
                       >
-                        {key}
+                        {proj.title}
                       </h3>
 
                       <div
@@ -416,10 +403,20 @@ export default function PaperArchitect() {
               </p>
               <a
                 href="mailto:tate@ecodia.au"
-                className="block text-2xl sm:text-2xl md:text-3xl font-black tracking-tighter uppercase hover:text-[#396041] transition-all text-black break-all"
+                className="block text-2xl sm:text-2xl md:text-3xl font-black tracking-tighter uppercase hover:text-[#396041]! transition-all text-black break-all"
               >
                 tate@ecodia.au
               </a>
+
+              {/* BOTTOM CTA */}
+              <div className="mt-10">
+                <Link
+href={{ pathname: "/start" }}
+                  className="inline-flex h-12 items-center justify-center border-2 border-black px-5 text-[10px] font-black uppercase tracking-[0.22em] hover:bg-black hover:text-white! transition-colors"
+                >
+                  Start a project
+                </Link>
+              </div>
 
               <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-end">
                 <div className="text-xs text-zinc-500 max-w-[40ch] leading-relaxed font-medium uppercase tracking-tighter">
@@ -428,7 +425,7 @@ export default function PaperArchitect() {
                 </div>
                 <div className="md:text-right">
                   <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest tracking-[0.4em]">
-                    ©2026 // CORAZON
+                    ©2026 // Ecodia
                   </span>
                 </div>
               </div>
@@ -440,7 +437,7 @@ export default function PaperArchitect() {
           <div className="w-full px-12">
             <div className="sticky top-1/2 -translate-y-1/2 w-full flex justify-center">
               <div className="w-full max-w-sm max-h-[calc(100vh-6rem)] overflow-auto inspector-scroll">
-                <InspectorCard activeProject={activeProject} current={current} />
+                {current ? <InspectorCard current={current} /> : null}
               </div>
             </div>
           </div>
@@ -477,7 +474,8 @@ export default function PaperArchitect() {
                     Close
                   </button>
                 </div>
-                <InspectorCard activeProject={activeProject} current={current} />
+
+                {current ? <InspectorCard current={current} /> : null}
               </div>
             </Reveal>
           </div>
